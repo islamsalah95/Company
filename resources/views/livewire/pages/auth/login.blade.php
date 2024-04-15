@@ -4,6 +4,7 @@ use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use Illuminate\Support\Facades\Auth;
 
 new #[Layout('layouts.guest')] class extends Component
 {
@@ -15,12 +16,20 @@ new #[Layout('layouts.guest')] class extends Component
     public function login(): void
     {
         $this->validate();
-
         $this->form->authenticate();
-
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+
+         
+        if( Auth::user()->department ==2){
+            $this->redirectRoute('crmEmploy');
+        }
+       else if(Auth::user()->department  == 3){
+            $this->redirectRoute('crmEmploy');
+        }
+        else{
+            $this->redirectRoute('crmCompany');
+        }
     }
 }; ?>
 

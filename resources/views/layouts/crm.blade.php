@@ -604,6 +604,21 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
+                                        
+                                        <form id="logout-form" action="{{ route('logouts') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+
+                                        <a class="dropdown-item" href="{{ route('logouts') }}"
+                                            onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                            <i class="ti ti-logout me-2 ti-sm"></i>
+                                            <span class="align-middle">{{ __('Log Out') }}</span>
+                                        </a> 
+
+                                        {{--  @livewire('nav.crm')  --}}
+
                                         {{--  <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                             style="display: none;">
                                             @csrf

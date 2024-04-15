@@ -12,7 +12,7 @@ class ShowEmploys extends Component
     public $search='';
     public $select=5;
 
-    // #[On('company-changed')]
+    #[On('company-changed')]
 
     public function createInstanceUserService()
     {

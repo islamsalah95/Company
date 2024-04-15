@@ -6,12 +6,14 @@ use App\Models\Task;
 use Livewire\Component;
 use App\Services\TaskService;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 
 class Show extends Component
 {
 
     public $search;
     public $paginate=5;
+    #[On('company-changed')]
 
    public function createInstanceTask()
    {

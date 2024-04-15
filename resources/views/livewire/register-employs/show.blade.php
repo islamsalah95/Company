@@ -49,12 +49,7 @@
         </div>
     </div>
 
-    {{--  {{ dd(json_encode($registerEmploys)) }}  --}}
-    {{--  @php
-    $jsonResponse =json_encode($registerEmploys);
-    $arrayResponse = json_decode($jsonResponse, true);
-    dd($arrayResponse);
-    @endphp  --}}
+
 
     <table class="datatables-basic table dataTable no-footer dtr-column collapsed" id="excelTable">
         <thead>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\State;
 use App\Models\Country;
 use Illuminate\Database\Eloquent\Model;
@@ -28,6 +29,13 @@ class City extends Model
     public function state(): BelongsTo
     {
         return $this->belongsTo(State::class, 'state_id');
+
+    }
+
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'city_id');
 
     }
 

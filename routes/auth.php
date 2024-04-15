@@ -33,12 +33,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::middleware(['auth'])->prefix('projects')->group(function () {
-    Route::get('/index', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
-});
 
-Route::middleware(['auth'])->prefix('tasks')->group(function () {
-    Route::get('/index', [ProjectController::class, 'index'])->name('tasks.index');
-    Route::get('/create', [ProjectController::class, 'create'])->name('tasks.create');
-});

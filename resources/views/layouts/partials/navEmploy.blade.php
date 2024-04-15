@@ -1,18 +1,27 @@
 <ul class="menu-inner py-1">
-    <!-- Emplys -->
+
     <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons ti ti-smart-home"></i>
-            <div data-i18n="Emplys">Emplys</div>
+            <div data-i18n="Crm">Crm</div>
         </a>
         <ul class="menu-sub">
-           Welcome
-           
+
+            <li class="menu-item">
+                <a href="{{ route('crm.employ.main') }}" class="menu-link">
+                    <div data-i18n="Main">Main</div>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="{{ route('crm.employ.report') }}" class="menu-link">
+                    <div data-i18n="Working Report">Working Report</div>
+                </a>
+            </li>
+
+
         </ul>
     </li>
-
-
-
 
 
 

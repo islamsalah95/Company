@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Carbon\Carbon;
+use App\Models\City;
 use App\Models\Task;
 use App\Models\Title;
+use App\Models\Project;
 use App\Models\Contract;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -111,15 +113,17 @@ class User extends Authenticatable
         }
     }
 
+
+
     public function projects()
     {
-        return $this->belongsToMany(Project::class, 'project_user', 'project_id', 'user_id');
+        return $this->belongsToMany(Project::class, 'project_user', 'user_id', 'project_id');
 
     }
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class, 'task_user', 'task_id', 'user_id');
+        return $this->belongsToMany(Task::class, 'task_user', 'user_id', 'task_id');
 
     }
 
@@ -128,5 +132,13 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class, 'company_id');
 
     }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class, 'city_id');
+
+    }
+
+    
 
 }

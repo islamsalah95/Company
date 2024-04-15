@@ -1,6 +1,6 @@
 <ul class="menu-inner py-1">
 
-    {{--  @if(Auth::user()->department==5)
+    @if(Auth::user()->department==5)
     <!-- company-select -->
 
     <li class="menu-item">
@@ -77,6 +77,45 @@
             </li>
         </ul>
     </li>
-  --}}
+
+
+    <!-- Projects -->
+    <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons ti ti-smart-home"></i>
+            <div data-i18n="Projects">Projects</div>
+        </a>
+        <ul class="menu-sub">
+
+
+            <li class="menu-item">
+                <a href="{{ route('projects.index') }}" class="menu-link">
+                    <div data-i18n="Projects">Projects</div>
+                </a>
+            </li>
+
+
+        </ul>
+    </li>
+
+
+    <!-- Tasks -->
+    <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons ti ti-smart-home"></i>
+            <div data-i18n="Tasks">Tasks</div>
+        </a>
+        <ul class="menu-sub">
+
+
+            <li class="menu-item">
+                <a href="{{ route('tasks.index') }}" class="menu-link">
+                    <div data-i18n="Tasks">Tasks</div>
+                </a>
+            </li>
+
+
+        </ul>
+    </li>
 
 </ul>

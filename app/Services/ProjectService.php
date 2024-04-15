@@ -80,5 +80,34 @@ class ProjectService
         return  $project->delete() ;
     }
 
+    public function AuthCompanyId()
+    {
+        if (session()->has('AuthCompanyId')) {
+            return session('AuthCompanyId');
+        } else {
+            return Auth::user()->company_id;
+        }
+    }
 
+    public function projectsUser($privates)
+    {
+
+        $array = [];
+
+        foreach ($privates as $private) {
+            if ($private->company_id == $this->AuthCompanyId() && $private->project_type == 'none') {
+                $array[] = $private;
+            }
+        }
+
+        $publicProjects = Project::where('company_id', $this->AuthCompanyId())->where('project_type', 'public')
+            ->get();
+        foreach ($publicProjects as $publicProject) {
+            if ($publicProject->company_id == $this->AuthCompanyId()) {
+                $array[] = $publicProject;
+            }
+        }
+
+        return    $array;
+    }
 }

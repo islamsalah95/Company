@@ -6,12 +6,14 @@ use App\Models\Project;
 use Livewire\Component;
 use App\Services\ProjectService;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 
 class Show extends Component
 {
 
     public $search;
     public $paginate=5;
+    #[On('company-changed')]
 
    public function createInstanceProject()
    {

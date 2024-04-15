@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="btn-group">
-                    <a href="{{ route('tasks.create',['country'=>66]) }}" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
+                    <a href="{{ route('tasks.create') }}" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
                         <span><i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New Record</span></span>
                     </a>
                 </div>
@@ -54,11 +54,12 @@
     <table class="datatables-basic table dataTable no-footer dtr-column collapsed" id="excelTable">
         <thead>
             <tr>
+                <th>id</th>
                 <th>name</th>
-                <th>project_id</th>
-                <th>start_date</th>
-                <th>end_date</th>
-                <th>created_at</th>
+                <th>start date</th>
+                <th>end date</th>
+                <th>created at</th>
+                <th>Project</th>
                 <th>Assign Users</th>
                 <th>Actions</th>
             </tr>
@@ -66,11 +67,12 @@
         <tbody class="table-border-bottom-0">
             @foreach ($tasks as $task)
             <tr>
+                <th>{{ $task->id }}</th>
                 <th>{{ $task->name }}</th>
-                <th>{{ $task->project_id}}</th>
                 <th>{{ $task->start_date }}</th>
                 <th>{{ $task->end_date}}</th>
                 <th>{{ $task->created_at}}</th>
+                <th>{{ $task->project->project_name}}</th>
                 <th>
                 <ul>
                     @foreach ( $task->users as $user )
@@ -85,7 +87,7 @@
                         </button>
                         <div class="dropdown-menu">
 
-                             <a class="dropdown-item" href="#" wire:click.prevent="delete({{ $project }})" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this project?')) { document.getElementById('delete-form-{{ $project->id }}').submit(); }">
+                             <a class="dropdown-item" href="#" wire:click.prevent="delete({{ $task }})" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this project?')) { document.getElementById('delete-form-{{ $task->id }}').submit(); }">
                                 <i class="ti ti-trash me-1"></i> Delete
                             </a>
 

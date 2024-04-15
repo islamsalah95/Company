@@ -34,8 +34,17 @@
                 @error('end_date') <span class="error">{{ $message }}</span> @enderror
             </div>
 
+            <div class="mb-3 col-md-6 ">
+                <label for="defaultSelect" class="form-label">project type</label>
+                <select wire:model.live="type" id="defaultSelect" class="form-select">
+                    <option value="public">public</option>
+                    <option value="private">private</option>
+                </select>
+                @error('type') <span class="error">{{ $message }}</span> @enderror
+            </div>
 
 
+            @if($showAssign==0)
             <div class="mb-12 col-md-12">
                 <label for="exampleFormControlSelect1" class="form-label">assign Users</label>
                 <select 
@@ -50,8 +59,8 @@
                        @endforeach
                 </select>
                 @error('user_id') <span class="error">{{ $message }}</span> @enderror
-
               </div>
+              @endif
 
 
 

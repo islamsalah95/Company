@@ -50,7 +50,6 @@
         </div>
     </div>
 
-    {{-- {{ dd($employs) }} --}}
 
     <table class="datatables-basic table dataTable no-footer dtr-column collapsed" id="excelTable">
         <thead>

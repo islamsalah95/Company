@@ -24,18 +24,18 @@ class ContractService
         $contract =  $this->contract::where('user_id', $userId)
             ->latest('created_on')
             ->first();
-    
+
         // Check if a contract was found
         if ($contract) {
             // Retrieve the end date from the contract
             $endDate = $contract->end_date;
-    
+
             // Convert the end date string to a Carbon instance for comparison
             $endDate = Carbon::parse($endDate);
-    
+
             // Get today's date
             $today = Carbon::today();
-    
+
             // Check if the end date has passed today
             if ($endDate->lessThanOrEqualTo($today)) {
                 // End date has passed, contract is invalid
@@ -96,6 +96,16 @@ class ContractService
 
         return  $contract->delete() ;
     }
+
+    public function userContract($authId)
+    {
+
+        return  Contract::where('user_id',$authId)
+        ->latest('created_on')
+        ->first(); 
+    }
+
+
 
 
 }

@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="btn-group">
-                    <a href="{{ route('projects.create',['country'=>66]) }}" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
+                    <a href="{{ route('projects.create') }}" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
                         <span><i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New Record</span></span>
                     </a>
                 </div>

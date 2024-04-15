@@ -18,6 +18,7 @@ class Create extends Component
     public $start_date;
     public $end_date;
     public $company;
+    public $type='public';
 
     public function createInstanceTask()
     {
@@ -41,7 +42,7 @@ class Create extends Component
   
             'user_id' => 'required|array',
             'user_id.*' => 'exists:users,id',
-         
+            'type' => 'required|in:public,private',
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after_or_equal:start_date',
         ];
@@ -53,6 +54,10 @@ class Create extends Component
     }
 
 
+    public function showAssign()
+    {
+        return $this->type == 'public' ? 1 : 0;
+    }
 
     public function save()
     {
@@ -62,6 +67,7 @@ class Create extends Component
         $array=[
             'name' => $this->name,
             'project_id' => $this->project_id,
+            'type' => $this->type,
             'company_id' => $this->AuthCompanyId(),
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
@@ -82,9 +88,14 @@ class Create extends Component
         $companyUsers=Company::findOrfail($this->AuthCompanyId());
         $companyProjects=Project::where('company_id',$this->AuthCompanyId())->get();
 
+        $showAssign = $this->showAssign();
+
+
+
         return view('livewire.tasks.create',[
         'companyUsers'=>$companyUsers->users,
         'companyProjects'=>$companyProjects,
+        'showAssign'=>$showAssign
         ]);
 
     }

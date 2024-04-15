@@ -3,6 +3,6 @@
 CRM Company
 @endsection
 @section('Content')
-<h4 class="py-3 mb-4"><span class="text-muted fw-light">Main Crm/</span>Active Users</h4>
+<h4 class="py-3 mb-4"><span class="text-muted fw-light">CRM Company/</span>Active Users</h4>
 
 @endsection

@@ -1,8 +1,28 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
-Route::view('/', 'welcome');
+Route::get('/', function () {
+    return view('home');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/crmCompany', function () {
+        return view('crmCompany');
+    })->name('crmCompany');
+
+
+    Route::POST('/logouts', function () {
+        Auth::guard('web')->logout();
+        Session::invalidate();
+        Session::regenerateToken();
+        return redirect('/');
+    })->name('logouts');
+});
+
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -13,3 +33,4 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 require __DIR__.'/auth.php';
+require __DIR__.'/crm.php';

@@ -14,7 +14,7 @@ class ProjectController extends Controller
     {
 
 
-        return view('crm.tasks.show');
+        return view('crm.projects.show');
 
 
     }
@@ -24,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('crm.tasks.create');
+        return view('crm.projects.create');
 
     }
 

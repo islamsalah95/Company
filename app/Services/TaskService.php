@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 
 class TaskService
@@ -41,6 +42,7 @@ class TaskService
         $Task->company_id=$request['company_id'];
         $Task->start_date=$request['start_date'];
         $Task->end_date=$request['end_date'];
+        $Task->type=$request['type'];
         $Task->save();
 
        if ($Task->id && $request['user_id'] !==[] ) {
@@ -59,5 +61,37 @@ class TaskService
         return  $Task->delete() ;
     }
 
+    public function AuthCompanyId()
+    {
+        if (session()->has('AuthCompanyId')) {
+            return session('AuthCompanyId');
+        } else {
+            return Auth::user()->company_id;
+        }
+    }
+    
+    public function tasksUser($privates ,$selectProject)
+    {
+
+
+        $array = [];
+
+        foreach ($privates as $private) {
+            if ($private->company_id == $this->AuthCompanyId() && $private->type == 'private' && $private->project_id == $selectProject) {
+                $array[] = $private;
+            }
+        }
+
+        $publicTasks = Task::where('company_id', $this->AuthCompanyId())->where('type', 'public')
+            ->get();
+        foreach ($publicTasks as $publicTask) {
+            if ($publicTask->company_id == $this->AuthCompanyId() && $publicTask->type == 'public' && $publicTask->project_id == $selectProject) {
+
+                $array[] = $publicTask;
+            }
+        }
+
+        return    $array;
+    }
 
 }
