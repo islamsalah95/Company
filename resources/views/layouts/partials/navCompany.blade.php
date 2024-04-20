@@ -118,4 +118,43 @@
         </ul>
     </li>
 
+
+    <!-- Reports -->
+    <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons ti ti-smart-home"></i>
+            <div data-i18n="Reports">Reports</div>
+        </a>
+        <ul class="menu-sub">
+
+
+            <li class="menu-item">
+                <a href="{{ route('reports.index') }}" class="menu-link">
+                    <div data-i18n="Reports">Reports</div>
+                </a>
+            </li>
+
+
+        </ul>
+    </li>
+
+    <!-- chats -->
+    <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons ti ti-smart-home"></i>
+            <div data-i18n="chats">chats</div>
+        </a>
+        <ul class="menu-sub">
+
+
+            <li class="menu-item">
+                <a href="{{ route('crm.chat.index') }}" class="menu-link">
+                    <div data-i18n="chats">chats</div>
+                </a>
+            </li>
+
+
+        </ul>
+    </li>
+
 </ul>

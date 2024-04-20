@@ -20,12 +20,12 @@ new #[Layout('layouts.guest')] class extends Component
         Session::regenerate();
 
 
-         
+
         if( Auth::user()->department ==2){
-            $this->redirectRoute('crmEmploy');
+            $this->redirectRoute('crm.employ.main');
         }
        else if(Auth::user()->department  == 3){
-            $this->redirectRoute('crmEmploy');
+            $this->redirectRoute('crm.employ.main');
         }
         else{
             $this->redirectRoute('crmCompany');

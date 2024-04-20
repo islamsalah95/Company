@@ -50,6 +50,18 @@ class UserService
                                paginate($paginate);
     }
 
+    public function getUsersDepartmentWithoutPagination($userDepartment,$name,$notVerify=1)
+    {
+
+
+
+        return    $this->user::where('department', $userDepartment)->
+                               where('company_id' , $this->AuthCompanyId())->
+                               where('status' , $notVerify)->
+                               where('name', 'like', '%' . $name. '%')->
+                               get();
+    }
+
     public function show(User  $user)
     {
         return $user;

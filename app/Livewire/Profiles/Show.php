@@ -27,7 +27,7 @@ class Show extends Component
     public function render()
     {
 
-      $totalContractHours = $this->createShiftService()->totalContractHours(Auth::user());
+      $totalContractHours = $this->createShiftService()->totalContractHours($this->authUser);
 
         return view('livewire.profiles.show',[
           'contract'=>$this->createInstanceContractService()->userContract($this->authUser->id),

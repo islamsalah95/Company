@@ -14,7 +14,7 @@
             </li>
 
             <li class="menu-item">
-                <a href="{{ route('crm.employ.report') }}" class="menu-link">
+                <a href="{{ route('crm.employ.report',['user'=>Auth::user()->id]) }}" class="menu-link">
                     <div data-i18n="Working Report">Working Report</div>
                 </a>
             </li>
@@ -24,8 +24,25 @@
     </li>
 
 
+    <!-- chats -->
+    <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons ti ti-smart-home"></i>
+            <div data-i18n="chats">chats</div>
+        </a>
+        <ul class="menu-sub">
+
+
+            <li class="menu-item">
+                <a href="{{ route('crm.chat.index') }}" class="menu-link">
+                    <div data-i18n="chats">chats</div>
+                </a>
+            </li>
+
+
+        </ul>
+    </li>
 
 
 
-    
 </ul>

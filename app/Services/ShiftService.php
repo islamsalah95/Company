@@ -96,17 +96,20 @@ class ShiftService
             }
         }else{
             if($startDate && $endDate ){
+                // from to working Hours
                 $shifts = Shift::where('user_id',  $auth->id)
                 ->where('company_id', $auth->company_id)
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->get();
               }
           else if($startDate){
+            // sacific day working Hours
             $shifts = Shift::where('user_id',  $auth->id)
             ->where('company_id', $auth->company_id)
             ->whereDate('created_at',$startDate)
             ->get();
           }else{
+           // Total Hours  for contract
             $startDateTime = Carbon::parse($contract->start_date)->startOfDay();
             $endDateTime = Carbon::parse($contract->end_date)->endOfDay();
             $shifts = Shift::where('user_id',  $auth->id)
@@ -158,7 +161,7 @@ class ShiftService
             ->first();
 
         $shifts = $this->shifts($auth,$search='',$paginate='',$startDate,$endDate);
-    
+
 
             foreach($shifts  as $shift){
                 $timer[]=calculateTimeDifference($shift->check_in,$shift->check_out);
@@ -168,27 +171,40 @@ class ShiftService
 
     public function totalContractHours($auth)
     {
+        // Total Hours  for contract
         $array=$this->ContractHours($auth);
         $isTotalHoursLessThanPerContract=isTotalHoursLessThan(sumTimes($array['timer']),$array['contract']->working_hours);
-       
+
+        // today  working Hours
         $arrayIsTotalHoursLessThanPerDay=$this->ContractHours($auth,Carbon::today());
         $isTotalHoursLessThanPerDay=isTotalHoursLessThan(sumTimes($arrayIsTotalHoursLessThanPerDay['timer']),$arrayIsTotalHoursLessThanPerDay['contract']->working_hours_per_day);
-       
+
+        // weekly  working Hours
         $startOfWeek =Carbon::now()->startOfWeek(Carbon::SUNDAY);
         $endOfWeek =  Carbon::now()->endOfWeek(Carbon::THURSDAY);
         $arrayIsTotalHoursLessThanPerWeek=$this->ContractHours($auth ,$startOfWeek,$endOfWeek);
         $isTotalHoursLessThanPerWeek=isTotalHoursLessThan(sumTimes($arrayIsTotalHoursLessThanPerWeek['timer']),$arrayIsTotalHoursLessThanPerWeek['contract']->working_hours_per_week);
 
-            
+
+        // monthly  working Hours
+        $startOfMonth =Carbon::now()->startOfMonth()->startOfWeek(Carbon::SUNDAY);
+        $endOfMonth =  Carbon::now()->endOfMonth()->endOfWeek(Carbon::THURSDAY);
+        $arrayIsTotalHoursLessThanPerMonth=$this->ContractHours($auth ,$startOfMonth,$endOfMonth);
+        $isTotalHoursLessThanPerMonth=isTotalHoursLessThan(sumTimes($arrayIsTotalHoursLessThanPerMonth['timer']),$arrayIsTotalHoursLessThanPerMonth['contract']->working_hours);
+
+
         return [
-        'sumTimesPerContract'=>sumTimes($array['timer']), 
+        'sumTimesPerContract'=>sumTimes($array['timer']),
         'isTotalHoursLessThanPerContract'=>$isTotalHoursLessThanPerContract,
 
-        'sumTimesPerDay'=>sumTimes($arrayIsTotalHoursLessThanPerDay['timer']), 
+        'sumTimesPerDay'=>sumTimes($arrayIsTotalHoursLessThanPerDay['timer']),
         'isTotalHoursLessThanPerDay'=>$isTotalHoursLessThanPerDay,
 
-        'sumTimesPerWeek'=>sumTimes($arrayIsTotalHoursLessThanPerWeek['timer']), 
+        'sumTimesPerWeek'=>sumTimes($arrayIsTotalHoursLessThanPerWeek['timer']),
         'isTotalHoursLessThanPerWeek'=>$isTotalHoursLessThanPerWeek,
+
+        'sumTimesPerMonth'=>sumTimes($arrayIsTotalHoursLessThanPerMonth['timer']),
+        'isTotalHoursLessThanPerMonth'=>$isTotalHoursLessThanPerMonth,
         ] ;
 
     }
