@@ -10,6 +10,7 @@ use App\Models\Project;
 use Livewire\Component;
 use App\Models\Contract;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 use App\Services\TaskService;
 use App\Services\ShiftService;
 use App\Services\ProjectService;
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\Auth;
 
 class Show extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
 
     public $selectProject;
     public $selectTask;
@@ -150,7 +154,7 @@ class Show extends Component
     public function render()
     {
             if($this->isStarted()){
-            $this->dispatch('timer'); 
+            $this->dispatch('timer');
             }
 
         return view('livewire.timer.show', [

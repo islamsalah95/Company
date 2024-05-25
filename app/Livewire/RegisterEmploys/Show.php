@@ -4,12 +4,16 @@ namespace App\Livewire\RegisterEmploys;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
 use App\Services\UserService;
 use App\Http\Resources\UserResource;
-use Livewire\Attributes\On;
 
 class Show extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
     public $search='';
     public $select=5;
 

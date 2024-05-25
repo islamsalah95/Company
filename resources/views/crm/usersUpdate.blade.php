@@ -3,7 +3,7 @@
 update User
 @endsection
 @section('Content')
-<h4 class="py-3 mb-4"><span class="text-muted fw-light">Users/Admin/</span>Update</h4>
+<h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ translate('Users/Admin')}}/</span>{{ translate('Update')}}</h4>
 <x-alert />
 
 <div class="card">

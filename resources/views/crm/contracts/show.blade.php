@@ -3,7 +3,7 @@
 Show Contracts Employ
 @endsection
 @section('Content')
-<h4 class="py-3 mb-4"><span class="text-muted fw-light">Users/Employ/</span>Show Contracts Employ</h4>
+<h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ translate('Users/Employ')}}/</span>{{ translate('Show Contracts Employ')}}</h4>
 <x-alert />
 @foreach($userContracts as $userContract)
     

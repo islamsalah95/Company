@@ -1,8 +1,9 @@
 @extends('layouts.crm')
 @section('title')
 Chat
+@endsection
 @section('Content')
-<h4 class="py-3 mb-4"><span class="text-muted fw-light">Chat/</span>Show</h4>
+<h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ translate('Chat')}}/</span>{{ translate('Show')}}</h4>
 
 <div class="app-chat card overflow-hidden">
     <div class="row g-0">
@@ -60,6 +61,7 @@ Chat
 <script src="../../assets/vendor/js/template-customizer.js"></script>
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="../../assets/js/config.js"></script>
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 @endsection
 
 
@@ -69,7 +71,7 @@ Chat
 @section('scripts')
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-
+<script src="{{ asset('vendor/livewire/livewire.js') }}"></script>
 <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
 <script src="../../assets/vendor/libs/popper/popper.js"></script>
 <script src="../../assets/vendor/js/bootstrap.js"></script>
@@ -90,5 +92,15 @@ Chat
 
 <!-- Page JS -->
 <script src="../../assets/js/app-chat.js"></script>
-
+{{--  <script>
+    Pusher.logToConsole = true;
+    var pusher = new Pusher('2d74ec4213a6b908e67f', {
+        cluster: 'eu'
+    });
+    var channel = pusher.subscribe('chat' + <?php echo Auth::user()->id; ?>);
+    channel.bind('PodcastChat', function(data) {
+        $wire.dispatch('message-sent');
+        alert(JSON.stringify(data));
+    });
+</script>  --}}
 @endsection

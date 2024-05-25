@@ -4,10 +4,14 @@ namespace App\Livewire\Company;
 
 use App\Models\Company;
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Services\CompanyService;
 
 class Show extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
     public $search='';
     public $select=5;
     public $is_valid;
@@ -41,8 +45,8 @@ class Show extends Component
     public function activeNewCompany(Company  $company)
     {
 
-            //  is_valid company 1 active 
-            // is_valid company 0 inactive   
+            //  is_valid company 1 active
+            // is_valid company 0 inactive
         $this->createInstanceCompanyService()->activeNewCompany($company);
 
         session()->flash('message', 'active New Company success.');

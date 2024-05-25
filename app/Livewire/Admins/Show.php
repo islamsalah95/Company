@@ -1,15 +1,19 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admins;
+
 use App\Models\User;
 use Livewire\Component;
-use App\Services\UserService;
-// use App\Traits\ExportPdfTrait;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use App\Services\UserService;
 
-class ShowAdmins extends Component
+class Show extends Component
 {
 
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
     public $search='';
     public $select=5;
     #[On('company-changed')]
@@ -61,6 +65,9 @@ class ShowAdmins extends Component
     public function render()
     {
 
-        return view( 'livewire.show-admins' , ['admins'=> $this->admins()] );
+        return view( 'livewire.admins.show' , ['admins'=> $this->admins()] );
     }
+
+
+
 }

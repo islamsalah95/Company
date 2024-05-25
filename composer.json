@@ -7,12 +7,17 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.0",
+        "laravel/reverb": "@beta",
+        "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
-        "nnjeim/world": "^1.1"
+        "nnjeim/world": "^1.1",
+        "pusher/pusher-php-server": "^7.2",
+        "stichoza/google-translate-php": "^5.1"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.0",
         "laravel/pint": "^1.13",

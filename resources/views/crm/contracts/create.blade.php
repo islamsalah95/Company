@@ -3,7 +3,7 @@
 contracts create
 @endsection
 @section('Content')
-<h4 class="py-3 mb-4"><span class="text-muted fw-light">Users/Employ/</span>Create Contract</h4>
+<h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ translate('Users/Employ')}}/</span>{{ translate('Create Contract')}}</h4>
 <x-alert />
 
 

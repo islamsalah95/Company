@@ -12,11 +12,12 @@ use App\Traits\CurrentDateTrait;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\On;
 
 class CreateAdmins extends Component
 {
     use WithFileUploads;
- 
+
     public $photo;
     public $id;
     public $name;
@@ -32,6 +33,7 @@ class CreateAdmins extends Component
     public $emp_photo_file;
     public $myJob ;
     public $search;
+    public $country=194;
 
     protected function rules()
     {
@@ -50,15 +52,6 @@ class CreateAdmins extends Component
         ];
     }
 
-
-
-    public function mount()
-    {
-
-
-    }
-
-
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -73,7 +66,7 @@ class CreateAdmins extends Component
 
       $newTitle_id=Title::firstWhere('job_ar',$this->search);
       $this->myJob=$this->search;
-      
+
         User::create([
             'name' => $this->name,
             'emp_name' => $this->name,
@@ -91,7 +84,7 @@ class CreateAdmins extends Component
 
             'company_id' => 1,
             'department' => 1,
-            'privacy_check' => 1, 
+            'privacy_check' => 1,
             'joining_date' =>    $formattedDate,
             'create_date' =>    $formattedDate,
 
@@ -103,17 +96,23 @@ class CreateAdmins extends Component
 
     }
 
+    #[On('country-change')]
+    public function countryChanged($country)
+    {
+        $this->country=$country;
 
+    }
 
     public function render()
     {
-        $cities = WorldTrait::getStatesByCountryId(194);
-        // $jobs = Title::all();
+        $cities=WorldTrait::countriesInfo($this->country);
+
         $qualifications = Qualification::all();
 
         $jobs = Title::where('job_ar', 'like', '%' . $this->search . '%')->get();
 
 
-        return view('livewire.update-admins', ['cities' => $cities, 'jobs' => $jobs, 'qualifications' => $qualifications]);
+        return view('livewire.create-admins', ['cities' =>  $cities[0]['cities'], 'jobs' => $jobs, 'qualifications' => $qualifications]);
     }
 }
+

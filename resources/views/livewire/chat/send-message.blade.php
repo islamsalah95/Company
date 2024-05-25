@@ -1,3 +1,4 @@
+
 <form  wire:submit.prevent="save" method="POST" class="form-send-message d-flex justify-content-between align-items-center">
     <input wire:model.live="message" class="form-control message-input border-0 me-3 shadow-none"
         placeholder="Type your message here" />

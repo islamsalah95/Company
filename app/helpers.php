@@ -1,4 +1,5 @@
 <?php
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
     function UnixTimeStampSeconds()
     {
@@ -99,6 +100,24 @@
         ];
     }
     
-
+    if (!function_exists('translate')) {
+        function translate($text, $targetLanguage = null)
+        {
+            try {
+                // Use the provided target language if available, otherwise use the application locale
+                $targetLanguage = $targetLanguage ?? app()->getLocale();
+        
+                // Get an instance of the GoogleTranslate class
+                $translator = app(GoogleTranslate::class);
+        
+                // Translate the text to the target language
+                return $translator->setTarget($targetLanguage)->translate($text);
+            } catch (\Exception $e) {
+                // Handle translation errors gracefully
+                return "Translation Error: " . $e->getMessage();
+            }
+        }
+    }
+    
 
 ?>

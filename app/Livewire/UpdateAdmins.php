@@ -12,11 +12,12 @@ use App\Traits\CurrentDateTrait;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\On;
 
 class UpdateAdmins extends Component
 {
     use WithFileUploads;
- 
+
     public $photo;
     public $id;
     public $name;
@@ -32,6 +33,7 @@ class UpdateAdmins extends Component
     public $emp_photo_file;
     public $myJob ;
     public $search;
+    public $country=194;
 
     protected function rules()
     {
@@ -87,7 +89,7 @@ class UpdateAdmins extends Component
 
       $newTitle_id=Title::firstWhere('job_ar',$this->search);
       $this->myJob=$this->search;
-      
+
         User::where('id', $this->id)
             ->update([
             'name' => $this->name,
@@ -118,20 +120,26 @@ class UpdateAdmins extends Component
 
     }
 
+    #[On('country-change')]
+    public function countryChanged($country)
+    {
+        $this->country=$country;
+
+    }
 
 
     public function render()
     {
-        $cities=WorldTrait::getCitiesByCountryId(194);
-        // $jobs = Title::all();
+        $cities=WorldTrait::countriesInfo($this->country);
+
         $qualifications = Qualification::all();
 
         $jobs = Title::where('job_ar', 'like', '%' . $this->search . '%')->get();
 
 
         return view('livewire.update-admins', [
-            'cities' => $cities,
-             'jobs' => $jobs, 
+            'cities' =>$cities[0]['cities'],
+             'jobs' => $jobs,
              'qualifications' => $qualifications]
             );
     }

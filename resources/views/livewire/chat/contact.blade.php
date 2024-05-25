@@ -31,6 +31,7 @@
 
 
             @foreach ($employs as $employ)
+            @if ($employ->id !== Auth::user()->id)
             <li class="chat-contact-list-item" id="{{ $employ->id }}" onclick="changeChatId('{{ $employ->id }}')">
                 <a wire:click="choese({{ $employ }})" class="d-flex align-items-center">
                     <div class="avatar d-block flex-shrink-0">
@@ -42,6 +43,7 @@
                     </div>
                 </a>
             </li>
+            @endif
         @endforeach
 
 

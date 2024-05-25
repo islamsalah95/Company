@@ -99,35 +99,8 @@
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
-                Showing {{ $tasks->firstItem() }} to {{ $tasks->lastItem() }} of {{ $tasks->total() }} entries
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                <ul class="pagination">
-                    <!-- Previous Page Link -->
-                    <li class="paginate_button page-item {{ $tasks->onFirstPage() ? 'disabled' : '' }}" id="DataTables_Table_0_previous">
-                        <a href="{{ $tasks->previousPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $tasks->onFirstPage() ? 'true' : 'false' }}" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">Previous</a>
-                    </li>
-    
-                    <!-- Pagination Elements -->
-                    @for ($i = 1; $i <= $tasks->lastPage(); $i++)
-                        <li class="paginate_button page-item {{ $i == $tasks->currentPage() ? 'active' : '' }}">
-                            <a href="{{ $tasks->url($i) }}" aria-controls="DataTables_Table_0" role="link" aria-current="{{ $i == $tasks->currentPage() ? 'page' : '' }}" data-dt-idx="{{ $i }}" tabindex="0" class="page-link">{{ $i }}</a>
-                        </li>
-                    @endfor
-    
-                    <!-- Next Page Link -->
-                    <li class="paginate_button page-item {{ $tasks->hasMorePages() ? '' : 'disabled' }}" id="DataTables_Table_0_next">
-                        <a href="{{ $tasks->nextPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $tasks->hasMorePages() ? 'false' : 'true' }}" role="link" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    {{ $tasks->links() }}
+
 
     <div style="width: 1%;"></div>
     <div style="width: 1%;"></div>

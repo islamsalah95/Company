@@ -7,7 +7,7 @@
           <form id="formAccountSettings" wire:submit.prevent="saveContact" method="POST" onsubmit="return false" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
             <div class="row">
             <div class="d-flex align-items-start align-items-sm-center gap-4">
-                <img 
+                <img
                 src="{{ asset( $emp_photo_file) }}"
                 alt="user-avatar" class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar">
                 <div class="button-wrapper">
@@ -25,7 +25,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="row">
 
 
@@ -54,7 +54,7 @@
 
               <div class="mb-3 col-md-6 fv-plugins-icon-container">
                 <label class="form-label" for="contact1">Phone Number</label>
-                  <input type="text" id="contact1" wire:model.live="contact1" class="form-control" 
+                  <input type="text" id="contact1" wire:model.live="contact1" class="form-control"
                   @error('contact1') <span class="error">{{ $message }}</span> @enderror
               </div>
 
@@ -96,6 +96,10 @@
                @error('qualification_id') <span class="error">{{ $message }}</span> @enderror
 
               </div>
+
+
+              @livewire('sharing.select-country')
+
 
 
               <div class="mb-3 col-md-6 fv-plugins-icon-container">

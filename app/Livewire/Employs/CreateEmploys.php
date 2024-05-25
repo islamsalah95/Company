@@ -12,10 +12,12 @@ use App\Traits\CurrentDateTrait;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\On;
+
 class CreateEmploys extends Component
 {
     use WithFileUploads;
- 
+
     public $photo;
     public $id;
     public $name;
@@ -31,6 +33,8 @@ class CreateEmploys extends Component
     public $emp_photo_file;
     public $myJob ;
     public $search;
+    public $country=194;
+
 
     protected function rules()
     {
@@ -41,21 +45,17 @@ class CreateEmploys extends Component
             'birthday' => ['required', 'date'],
             'employee_national_number' => ['required', 'numeric'],
             'city_id' => ['required', 'exists:cities,id'],
-            'title_id' => ['required', 'exists:titles,id'],
-            'qualification_id' => ['required', 'exists:qualifications,id'],
             'email' => ['required', 'string', 'email', 'max:255', 'exists:users,email'],
             'password' => ['required', Rules\Password::defaults()],
             'emp_photo_file' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // max:2048 means maximum file size is 2 MB
+
+            'country' => ['required', 'exists:countries,id'],
+            'title_id' => ['required', 'exists:titles,id'],
+            'qualification_id' => ['required', 'exists:qualifications,id'],
+
         ];
     }
 
-
-
-    public function mount()
-    {
-
-
-    }
 
 
     public function updated($propertyName)
@@ -66,13 +66,12 @@ class CreateEmploys extends Component
     public function saveContact()
     {
 
+        $this->validate();
+
       $formattedDate = CurrentDateTrait::getDate_Y_m_d_H_i_s();
        $path= ImageUploadTrait::uploadImage($this->emp_photo_file,'profile');
        $this->emp_photo_file=$path;
 
-      $newTitle_id=Title::firstWhere('job_ar',$this->search);
-      $this->myJob=$this->search;
-      
         User::create([
             'name' => $this->name,
             'emp_name' => $this->name,
@@ -82,7 +81,7 @@ class CreateEmploys extends Component
             'employee_national_number' => $this->employee_national_number,
 
             'city_id' => $this->city_id,
-            'title_id' => $newTitle_id['id'],
+            'title_id' => $this->title_id,
             'qualification_id' => $this->qualification_id,
 
             'email' => $this->email,
@@ -90,7 +89,7 @@ class CreateEmploys extends Component
 
             'company_id' => 1,
             'department' => 2,
-            'privacy_check' => 1, 
+            'privacy_check' => 1,
             'joining_date' =>    $formattedDate,
             'create_date' =>    $formattedDate,
 
@@ -102,18 +101,33 @@ class CreateEmploys extends Component
 
     }
 
+    #[On('country-change')]
+    public function countryChanged($country)
+    {
+        $this->country=$country;
 
+    }
+
+
+    #[On('qualification-change')]
+    public function qualificationChanged($qualification_id)
+    {
+        $this->qualification_id=$qualification_id;
+
+    }
+
+    #[On('job-change')]
+    public function jobChanged($title_id)
+    {
+        $this->title_id=$title_id;
+
+    }
 
     public function render()
     {
-        $cities=WorldTrait::getCitiesByCountryId(194);
-        // $jobs = Title::all();
-        $qualifications = Qualification::all();
+        $cities=WorldTrait::countriesInfo($this->country);
 
-        $jobs = Title::where('job_ar', 'like', '%' . $this->search . '%')->get();
-
-
-        return view('livewire.employs.create-employs', ['cities' => $cities, 'jobs' => $jobs, 'qualifications' => $qualifications]);
+        return view('livewire.employs.create-employs', ['cities' => $cities[0]['cities']]);
     }
 
 

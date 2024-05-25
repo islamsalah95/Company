@@ -41,8 +41,119 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css" />
     <!-- Page CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/pages/page-profile.css" />
-    @show
 
+    <style>
+        /* Add your spinner CSS here */
+        #spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .sk-fold-cube {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            transform: rotateZ(45deg);
+        }
+        .sk-fold-cube::before, .sk-fold-cube::after, .sk-fold-cube div::before, .sk-fold-cube div::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            transform-origin: 100% 100%;
+            animation: sk-fold-cube 2.4s infinite linear both;
+        }
+        .sk-fold-cube::after {
+            transform: rotateZ(90deg);
+            animation-delay: 0.3s;
+        }
+        .sk-fold-cube div::before {
+            transform: rotateZ(180deg);
+            animation-delay: 0.6s;
+        }
+        .sk-fold-cube div::after {
+            transform: rotateZ(270deg);
+            animation-delay: 0.9s;
+        }
+        @keyframes sk-fold-cube {
+            0%, 10% {
+                transform: perspective(140px) rotateX(-180deg);
+                opacity: 0;
+            }
+            25%, 75% {
+                transform: perspective(140px) rotateX(0deg);
+                opacity: 1;
+            }
+            90%, 100% {
+                transform: perspective(140px) rotateY(180deg);
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <style>
+        /* Progress Bar CSS */
+        #progress-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+        }
+        #progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: #3498db;
+            transition: width 0.4s;
+        }
+    </style>
+    <style>
+        .custom-select-wrapper {
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+          }
+          
+          .custom-select-wrapper select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #333;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M7.247 10.950a.5.5 0 0 1 .276-1.253l1.888-3.808a.5.5 0 1 1 .793.506L8.75 9.56l1.664-1.888a.5.5 0 0 1 .506.793l-3.808 1.888a.5.5 0 0 1-.793 0L6 10.207l-1.664 1.888Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1em;
+            transition: background-image 0.2s;
+          }
+          
+          .custom-select-wrapper select:focus {
+            outline: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%235e5e5e' d='M7.247 10.950a.5.5 0 0 1 .276-1.253l1.888-3.808a.5.5 0 1 1 .793.506L8.75 9.56l1.664-1.888a.5.5 0 0 1 .506.793l-3.808 1.888a.5.5 0 0 1-.793 0L6 10.207l-1.664 1.888Z'%3E%3C/path%3E%3C/svg%3E");
+          }
+          
+          .custom-select-wrapper select::-ms-expand {
+            display: none;
+          }
+    </style>
+
+    @show
     @livewireStyles
 
     @section('scriptsHead')
@@ -58,6 +169,26 @@
 </head>
 
 <body>
+    {{--  //me  --}}
+    <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="spinner">
+        <div class="sk-fold-cube"></div>
+    </div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+      </div>
+
+@if (auth()->check())
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -131,33 +262,15 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Language -->
                             <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
-                                    <i class="ti ti-language rounded-circle ti-md"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="en">
-                                            <span class="align-middle">English</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="fr">
-                                            <span class="align-middle">French</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="de">
-                                            <span class="align-middle">German</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="pt">
-                                            <span class="align-middle">Portuguese</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+
+                                <div class="custom-select-wrapper">Lang:
+                                  <select id="languageSelect" onchange="changeLanguage(this)">
+                                    @foreach (config('app.supported_locales') as $lang)
+                                    <option value="{{ $lang }}" {{ app()->getLocale() === $lang ? 'selected' : '' }}>{{ $lang }}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                              </li>
                             <!--/ Language -->
 
                             <!-- Style Switcher -->
@@ -679,7 +792,21 @@
         <div class="drag-target"></div>
     </div>
     <!-- / Layout wrapper -->
+    @else
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Content -->
 
+            @yield('Content')
+
+
+            <!-- / Content -->
+        </div>
+        <div class="content-backdrop fade"></div>
+    </div>
+    <!-- Content wrapper -->
+    @endif
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     @section('scripts')
@@ -692,6 +819,30 @@
     <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
     <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="../../assets/vendor/js/menu.js"></script>
+   
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+
+    <!-- Main JS -->
+    <script src="../../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="../../assets/js/pages-profile.js"></script>
+    @show
+
+    <script>
+        // Function to handle language change from dropdown
+        function changeLanguage(select) {
+            const locale = select.value;
+            window.location.href = `?lang=${locale}`;
+        }
+
+    </script>
+
+
+{{--  //me  --}}
     <script type="text/javascript">
         function printDiv() {
         var elementToPrint = document.getElementById('myTabel');
@@ -720,19 +871,38 @@
         }
     </script>
 
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-
-    <!-- Main JS -->
-    <script src="../../assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="../../assets/js/pages-profile.js"></script>
-    @show
-
     @livewireScripts
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("spinner").style.display = "none";
+        });
+    </script>
+    <script>
+        // JavaScript to handle progress bar
+        document.addEventListener("DOMContentLoaded", function() {
+            var progressBar = document.getElementById("progress-bar");
+
+            // Simulate progress for demonstration purposes
+            var progress = 0;
+            var interval = setInterval(function() {
+                if (progress < 100) {
+                    progress += Math.random() * 10; // Increment progress randomly
+                    if (progress > 100) progress = 100;
+                    progressBar.style.width = progress + "%";
+                }
+            }, 200);
+
+            window.addEventListener("load", function() {
+                clearInterval(interval); // Stop the simulated progress
+                progressBar.style.width = "100%"; // Ensure it's fully loaded
+                setTimeout(function() {
+                    document.getElementById("progress-bar-container").style.display = "none";
+                }, 500); // Optional delay to show the full progress
+            });
+        });
+    </script>
+
+    
     </body>
 
 </html>

@@ -3,7 +3,7 @@
 Company create
 @endsection
 @section('Content')
-<h4 class="py-3 mb-4"><span class="text-muted fw-light">Companies/</span>create</h4>
+<h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ translate('Companies')}}/</span>{{ translate('create')}}</h4>
     @livewire('company.create',['country'=>$country])
 @endsection
 

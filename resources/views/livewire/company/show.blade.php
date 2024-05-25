@@ -104,7 +104,7 @@
                                 <i class="fab fa-500px mb-2"></i> Change Status
                             </a>
 
-                            {{--  is_valid company 1 active 
+                            {{--  is_valid company 1 active
                             is_valid company 0 inactive   --}}
                             @if($company->is_valid==0 )
                             <a class="dropdown-item" href="#" wire:click.prevent="activeNewCompany({{ $company->id }})" onclick="event.preventDefault(); if(confirm('Are you sure you want to active New Company this user?')) { document.getElementById('block-form-{{ $company->id }}').submit(); }">
@@ -121,7 +121,7 @@
                             </a>
 
                             {{--
-                                
+
 
 
 
@@ -149,35 +149,8 @@
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
-                Showing {{ $companies->firstItem() }} to {{ $companies->lastItem() }} of {{ $companies->total() }} entries
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                <ul class="pagination">
-                    <!-- Previous Page Link -->
-                    <li class="paginate_button page-item {{ $companies->onFirstPage() ? 'disabled' : '' }}" id="DataTables_Table_0_previous">
-                        <a href="{{ $companies->previousPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $companies->onFirstPage() ? 'true' : 'false' }}" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">Previous</a>
-                    </li>
-    
-                    <!-- Pagination Elements -->
-                    @for ($i = 1; $i <= $companies->lastPage(); $i++)
-                        <li class="paginate_button page-item {{ $i == $companies->currentPage() ? 'active' : '' }}">
-                            <a href="{{ $companies->url($i) }}" aria-controls="DataTables_Table_0" role="link" aria-current="{{ $i == $companies->currentPage() ? 'page' : '' }}" data-dt-idx="{{ $i }}" tabindex="0" class="page-link">{{ $i }}</a>
-                        </li>
-                    @endfor
-    
-                    <!-- Next Page Link -->
-                    <li class="paginate_button page-item {{ $companies->hasMorePages() ? '' : 'disabled' }}" id="DataTables_Table_0_next">
-                        <a href="{{ $companies->nextPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $companies->hasMorePages() ? 'false' : 'true' }}" role="link" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    {{ $companies->links() }}
+
 
     <div style="width: 1%;"></div>
     <div style="width: 1%;"></div>

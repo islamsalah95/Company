@@ -4,18 +4,21 @@ namespace App\Livewire\Company;
 
 use App\Models\Company;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class CompanySelect extends Component
 {
+    use WithPagination;
 
-public $select;
+    protected $paginationTheme = 'bootstrap';
+    public $select;
 
 
 
     public function change()
     {
         session(['AuthCompanyId' => $this->select]);
-
+        session()->forget('cat_with');
         $this->dispatch('company-changed');
 
     }

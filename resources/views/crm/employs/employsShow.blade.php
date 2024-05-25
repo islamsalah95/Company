@@ -3,7 +3,7 @@
 show employs
 @endsection
 @section('Content')
-<h4 class="py-3 mb-4"><span class="text-muted fw-light">Users/</span>Employ</h4>
+<h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ translate('Users')}}/</span>{{ translate('Employ')}}</h4>
 <x-alert />
 
 

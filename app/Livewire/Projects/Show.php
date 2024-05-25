@@ -4,13 +4,16 @@ namespace App\Livewire\Projects;
 
 use App\Models\Project;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
 use App\Services\ProjectService;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\On;
 
 class Show extends Component
 {
+    use WithPagination;
 
+    protected $paginationTheme = 'bootstrap';
     public $search;
     public $paginate=5;
     #[On('company-changed')]
@@ -36,7 +39,7 @@ class Show extends Component
 
    }
 
-   
+
    public function delete($project)
    {
     $this->createInstanceProject()->destroy($project['id']);
@@ -46,8 +49,8 @@ class Show extends Component
 
     public function render()
     {
-        
-        
+
+
         return view('livewire.projects.show',['projects'=>$this->projects()]);
     }
 }

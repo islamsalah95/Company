@@ -3,7 +3,7 @@
 Company edit
 @endsection
 @section('Content')
-<h4 class="py-3 mb-4"><span class="text-muted fw-light">Companies/</span>edit</h4>
+<h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ translate('Companies')}}/</span>{{ translate('edit')}}</h4>
     @livewire('company.edit',['company'=>$company])
 @endsection
 

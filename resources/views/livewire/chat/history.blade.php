@@ -1,5 +1,6 @@
 <!-- Chat History -->
 <div class="col app-chat-history bg-body">
+    @if (session('cat_with'))
     <x-alert />
     <div class="chat-history-wrapper">
         <div class="chat-history-header border-bottom">
@@ -21,10 +22,11 @@
             </div>
             @endif
         </div>
+
         <div class="chat-history-body bg-body">
             <ul class="list-unstyled chat-history">
 
-                @if ($messages !==[])
+                @if ($messages !==[] )
                 @foreach ( $messages as $message )
                 @if ($message->from_user_id==Auth::user()->id)
                 {{--  //me  --}}
@@ -73,13 +75,26 @@
         </div>
         <!-- Chat message form -->
         <div class="chat-history-footer shadow-sm">
+            @if ($messages !==[] )
             @livewire('chat.send-message')
+            @endif
         </div>
     </div>
+    @endif
 </div>
 <!-- /Chat History -->
 
 
-
+{{--  <script>
+    Pusher.logToConsole = true;
+    var pusher = new Pusher('2d74ec4213a6b908e67f', {
+        cluster: 'eu'
+    });
+    var channel = pusher.subscribe('chat' + <?php echo Auth::user()->id; ?>);
+    channel.bind('PodcastChat', function(data) {
+        Livewire.emit('message-sent')
+        alert(JSON.stringify(data));
+    });
+</script>  --}}
 
 

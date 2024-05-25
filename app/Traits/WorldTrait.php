@@ -155,5 +155,21 @@ trait WorldTrait
         }
     }
 
+    public static function getCitiesByCountryId($countryId)
+    {
+        $world = new WorldHelper(); // Create a new instance of WorldHelper
+        $action = $world->states([
+            'filters' => [
+                'country_id' => $countryId, // Use the provided country ID
+            ],
+        ]);
 
+        // Check if the action was succe+ssful
+        if ($action->success) {
+            return $action->data;
+        } else {
+            // Handle the case where fetching cities failed
+            return response()->json(['error' => 'Failed to fetch cities'], 500);
+        }
+    }
 }

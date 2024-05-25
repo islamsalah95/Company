@@ -14,8 +14,8 @@
                     </button>
                 </div>
 
-                
-                <a href="{{ route('users.create') }}" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
+
+                <a href="{{ route('users.create.admins') }}" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
                     <span><i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New Record</span></span>
                 </a>
 
@@ -112,36 +112,9 @@
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
-                Showing {{ $admins->firstItem() }} to {{ $admins->lastItem() }} of {{ $admins->total() }} entries
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                <ul class="pagination">
-                    <!-- Previous Page Link -->
-                    <li class="paginate_button page-item {{ $admins->onFirstPage() ? 'disabled' : '' }}" id="DataTables_Table_0_previous">
-                        <a href="{{ $admins->previousPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $admins->onFirstPage() ? 'true' : 'false' }}" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">Previous</a>
-                    </li>
-    
-                    <!-- Pagination Elements -->
-                    @for ($i = 1; $i <= $admins->lastPage(); $i++)
-                        <li class="paginate_button page-item {{ $i == $admins->currentPage() ? 'active' : '' }}">
-                            <a href="{{ $admins->url($i) }}" aria-controls="DataTables_Table_0" role="link" aria-current="{{ $i == $admins->currentPage() ? 'page' : '' }}" data-dt-idx="{{ $i }}" tabindex="0" class="page-link">{{ $i }}</a>
-                        </li>
-                    @endfor
-    
-                    <!-- Next Page Link -->
-                    <li class="paginate_button page-item {{ $admins->hasMorePages() ? '' : 'disabled' }}" id="DataTables_Table_0_next">
-                        <a href="{{ $admins->nextPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $admins->hasMorePages() ? 'false' : 'true' }}" role="link" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
+    {{ $admins->links() }}
+
+
     <div style="width: 1%;"></div>
     <div style="width: 1%;"></div>
 </div>

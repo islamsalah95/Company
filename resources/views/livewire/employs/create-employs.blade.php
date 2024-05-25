@@ -7,7 +7,7 @@
       <form id="formAccountSettings" wire:submit.prevent="saveContact" method="POST" onsubmit="return false" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
         <div class="row">
         <div class="d-flex align-items-start align-items-sm-center gap-4">
-            <img 
+            <img
             src="{{ asset( $emp_photo_file) }}"
             alt="user-avatar" class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar">
             <div class="button-wrapper">
@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="row">
 
 
@@ -54,7 +54,7 @@
 
           <div class="mb-3 col-md-6 fv-plugins-icon-container">
             <label class="form-label" for="contact1">Phone Number</label>
-              <input type="text" id="contact1" wire:model.live="contact1" class="form-control" 
+              <input type="text" id="contact1" wire:model.live="contact1" class="form-control"
               @error('contact1') <span class="error">{{ $message }}</span> @enderror
           </div>
 
@@ -83,19 +83,22 @@
           </div>
 
 
-          <div class="mb-3 col-md-6 fv-plugins-icon-container">
+          <div class="col-sm-6">
             <label for="qualification" class="form-label">Qualification</label>
-            <div class="position-relative" data-select2-id="49">
-            <select id="qualification" wire:model.live="qualification_id" class="select2 form-select select2-hidden-accessible" data-select2-id="language" tabindex="-1" aria-hidden="true">
-                <option value="" data-select2-id="">Select qualification</option>
-                @foreach ($qualifications as $qualification)
-                <option value="{{ $qualification['id'] }}" data-select2-id="{{ $qualification['id'] }}">{{ $qualification['name'] }}</option>
-                @endforeach
-            </select>
-           </div>
-           @error('qualification_id') <span class="error">{{ $message }}</span> @enderror
+            @livewire('sharing.select-qualifications')
+            @error('qualification_id')
+                <span class="error">{{ $message }}</span>
+            @enderror
 
-          </div>
+        </div>
+
+
+
+         <div class="col-sm-6">
+            <label for="country" class="form-label">Country</label>
+            @livewire('sharing.select-country')
+                @error('country') <span class="error">{{ $message }}</span> @enderror
+         </div>
 
 
           <div class="mb-3 col-md-6 fv-plugins-icon-container">
@@ -109,25 +112,16 @@
             </select>
            </div>
            @error('city_id') <span class="error">{{ $message }}</span> @enderror
-
           </div>
 
 
-          <div class="mb-3 col-md-6 fv-plugins-icon-container">
-            <label for="Job"  class="form-label">Job</label>
-            <div class="position-relative" data-select2-id="49">
-                <input list="browsers" type="text" id='Job'  wire:model.live="search" placeholder="Search Jobs">
-                <datalist  id="browsers">
-                    <option   data-select2-id="">Select Job</option>
-                    @foreach ($jobs as $job)
-                    <option value="{{ $job['job_ar'] }}">{{ $job['job_ar'] }}</option>
-                    @endforeach
-                </datalist>
-                {{ $myJob; }}
-           </div>
-           @error('title_id') <span class="error">{{ $message }}</span> @enderror
-
-          </div>
+          <div class="col-sm-6">
+            <label for="job_ar" class="form-label">Job</label>
+               @livewire('sharing.select-job')
+                @error('title_id')
+                <span class="error">{{ $message }}</span>
+                 @enderror
+            </div>
 
 
           <div class="mb-3 col-md-6 fv-plugins-icon-container">

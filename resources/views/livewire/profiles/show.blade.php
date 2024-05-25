@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">User Profile /</span> Profile</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">{{ translate('User Profile ')}}/</span>{{ translate(' Profile</h4>
         <!-- Header -->
         <div class="row">
             <div class="col-12">

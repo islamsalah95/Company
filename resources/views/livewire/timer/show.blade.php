@@ -40,7 +40,7 @@
                 </div>
             </div>
             @endif
-    
+
             <div class="card-body">
                 @if($isStarted !== null)
                 <p>Started Time: {{ convertTime($isStarted->check_in) }}</p>
@@ -62,7 +62,7 @@
         <x-alert />
 
     </div>
-    
+
 
 
 
@@ -77,16 +77,16 @@
                                     </i> <span class="d-none d-sm-inline-block">Print</span></span><span class="dt-down-arrow"></span>
                             </button>
                         </div>
-        
+
                         <div class="btn-group">
                             <button onclick="exportToExcel('Emplys')" class="btn btn-secondary buttons-collection dropdown-toggle btn-label-primary me-2" tabindex="0" aria-controls="DataTables_Table_0" type="button" aria-haspopup="dialog" aria-expanded="false"><span><i class="ti ti-file-export me-sm-1">
                                     </i> <span class="d-none d-sm-inline-block">Export</span></span><span class="dt-down-arrow"></span>
                             </button>
                         </div>
-        
+
                         <div class="btn-group" style="width: 10px;">
                         </div>
-        
+
                     </div>
                 </div>
                 <div class="row">
@@ -112,8 +112,8 @@
                     </div>
                 </div>
             </div>
-        
-        
+
+
             <table class="datatables-basic table dataTable no-footer dtr-column collapsed" id="excelTable">
                 <thead>
                     <tr>
@@ -140,42 +140,15 @@
                     @endforeach
                 </tbody>
             </table>
-        
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
-                        Showing {{ $shifts->firstItem() }} to {{ $shifts->lastItem() }} of {{ $shifts->total() }} entries
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                        <ul class="pagination">
-                            <!-- Previous Page Link -->
-                            <li class="paginate_button page-item {{ $shifts->onFirstPage() ? 'disabled' : '' }}" id="DataTables_Table_0_previous">
-                                <a href="{{ $shifts->previousPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $shifts->onFirstPage() ? 'true' : 'false' }}" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">Previous</a>
-                            </li>
-            
-                            <!-- Pagination Elements -->
-                            @for ($i = 1; $i <= $shifts->lastPage(); $i++)
-                                <li class="paginate_button page-item {{ $i == $shifts->currentPage() ? 'active' : '' }}">
-                                    <a href="{{ $shifts->url($i) }}" aria-controls="DataTables_Table_0" role="link" aria-current="{{ $i == $shifts->currentPage() ? 'page' : '' }}" data-dt-idx="{{ $i }}" tabindex="0" class="page-link">{{ $i }}</a>
-                                </li>
-                            @endfor
-            
-                            <!-- Next Page Link -->
-                            <li class="paginate_button page-item {{ $shifts->hasMorePages() ? '' : 'disabled' }}" id="DataTables_Table_0_next">
-                                <a href="{{ $shifts->nextPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $shifts->hasMorePages() ? 'false' : 'true' }}" role="link" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        
+
+            {{ $shifts->links() }}
+
+
             <div style="width: 1%;"></div>
             <div style="width: 1%;"></div>
         </div>
     </div>
-    
+
 
 
 </div>

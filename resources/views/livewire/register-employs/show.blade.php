@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="btn-group">
-                    <a href="{{ route('users.createEmploys') }}" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
+                    <a href="{{ route('users.create.employs') }}" class="btn btn-secondary create-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
                         <span><i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New Record</span></span>
                     </a>
                 </div>
@@ -75,7 +75,7 @@
                 <th>{{ $registerEmploy['contact1'] }}</th>
                 <th>{{ $registerEmploy->qualification->name }}</th>
                 <th>{{ $registerEmploy->title->job_en }}</th>
-                
+
                 <th>
                 @if ($registerEmploy->expiration($registerEmploy['id']))
                 <span class="badge bg-label-primary me-1">
@@ -89,7 +89,7 @@
                     </span>
                 @endif
                </th>
-               
+
                 <td>
                     @if ($registerEmploy['status'] == 1)
                     <span class="badge bg-label-primary me-1">
@@ -138,35 +138,8 @@
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
-                Showing {{ $registerEmploys->firstItem() }} to {{ $registerEmploys->lastItem() }} of {{ $registerEmploys->total() }} entries
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                <ul class="pagination">
-                    <!-- Previous Page Link -->
-                    <li class="paginate_button page-item {{ $registerEmploys->onFirstPage() ? 'disabled' : '' }}" id="DataTables_Table_0_previous">
-                        <a href="{{ $registerEmploys->previousPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $registerEmploys->onFirstPage() ? 'true' : 'false' }}" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">Previous</a>
-                    </li>
-    
-                    <!-- Pagination Elements -->
-                    @for ($i = 1; $i <= $registerEmploys->lastPage(); $i++)
-                        <li class="paginate_button page-item {{ $i == $registerEmploys->currentPage() ? 'active' : '' }}">
-                            <a href="{{ $registerEmploys->url($i) }}" aria-controls="DataTables_Table_0" role="link" aria-current="{{ $i == $registerEmploys->currentPage() ? 'page' : '' }}" data-dt-idx="{{ $i }}" tabindex="0" class="page-link">{{ $i }}</a>
-                        </li>
-                    @endfor
-    
-                    <!-- Next Page Link -->
-                    <li class="paginate_button page-item {{ $registerEmploys->hasMorePages() ? '' : 'disabled' }}" id="DataTables_Table_0_next">
-                        <a href="{{ $registerEmploys->nextPageUrl() }}" aria-controls="DataTables_Table_0" aria-disabled="{{ $registerEmploys->hasMorePages() ? 'false' : 'true' }}" role="link" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    {{ $registerEmploys->links() }}
+
 
     <div style="width: 1%;"></div>
     <div style="width: 1%;"></div>

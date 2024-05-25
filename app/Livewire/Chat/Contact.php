@@ -5,12 +5,15 @@ namespace App\Livewire\Chat;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
 class Contact extends Component
 {
+    use WithPagination;
 
+    protected $paginationTheme = 'bootstrap';
     public $search;
 
 
@@ -25,15 +28,15 @@ class Contact extends Component
 
     public function employs()
     {
-
-        return  $this->createInstanceUserService()->getUsersDepartmentWithoutPagination(3,$this->search);
+        $employs=$this->createInstanceUserService()->getUsersDepartmentWithoutPagination(3,$this->search);
+        return  $employs;
 
     }
 
     public function choese($employ)
     {
-       $this->dispatch('choese-contact');
        session()->put('cat_with',User::find($employ['id']));
+       $this->dispatch('choese-contact');
 
     }
 

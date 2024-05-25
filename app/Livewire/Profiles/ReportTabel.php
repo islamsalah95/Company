@@ -23,12 +23,12 @@ class ReportTabel extends Component
 
     public $startFrom;
     public $endFrom;
-    
+
     public function mount(){
         $this->startFrom = Carbon::today()->format('Y-m-d');
         $this->endFrom = Carbon::today()->format('Y-m-d');
-    } 
-  
+    }
+
     public function createShiftService()
     {
         return  new ShiftService();
@@ -64,7 +64,7 @@ class ReportTabel extends Component
     }
 
 
-  
+
     public function shifts()
     {
         return  $this->createShiftService()->shifts(
@@ -75,7 +75,7 @@ class ReportTabel extends Component
             $this->endDate
         );
     }
-  
+
       public function render()
       {
 
